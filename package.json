@@ -1,0 +1,42 @@
+{
+  "name": "bull-horn",
+  "version": "1.0.0",
+  "description": "mutation officer",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/"
+  },
+  "author": "plasmashadow",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strawhatspirates/bull-horn.git"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {
+    "jQuery": "global:jQuery"
+  },
+  "keywords": [
+    "mutation",
+    "summary"
+  ],
+  "bugs": {
+    "url": "https://github.com/strawhatspirates/bull-horn/issues"
+  },
+  "homepage": "https://github.com/strawhatspirates/bull-horn#readme",
+  "devDependencies": {
+    "browserify": "^13.0.1",
+    "browserify-shim": "^3.8.12",
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
+  },
+  "dependencies": {
+    "jquery": "^3.0.0",
+    "jquery.lifecycle": "^0.1.2",
+    "mutation-summary": "0.0.0"
+  }
+}

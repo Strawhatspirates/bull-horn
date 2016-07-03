@@ -1,0 +1,4 @@
+require("jquery.lifecycle");
+(function($){
+
+})($)
