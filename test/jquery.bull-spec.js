@@ -1,10 +1,14 @@
 describe("jquery.bull-horn", function() {
 
    beforeEach(function(){
-     this.fixtures = $("#fixtures");
+     this.document = $(document);
    });
 
-   it('should observe', function(){
-     
+   it('should observe', function(done){
+       this.document.trigger('click');
+       this.document.on('observation', function(i,data){
+         console.log(data);
+         done();
+       });
    });
 });
