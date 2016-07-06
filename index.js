@@ -1,37 +1,53 @@
+module.exports = BullHorn = (function(){
 
-(function($){
-   var MuationSummary = global.MutationSummary = require('mutation-summary');
-   var summary = null;
-   var observer = global.observer =new MuationSummary({
-     callback: function(summaries){
-       summary=summaries;
-     },
-     queries: [{all:true}]
-   });
+   //initializing the mutation summary
+   var Summary = require('./lib/summary');
+   var Events = require('minivents');
+   var Q = require('q');
+   var assign = require('object-assign');
 
-   var actions = [
-     'load',
-     'click',
-     'keypress',
-     'keydown'
-   ]
+   var self = this;
+   var _module = new Object();
 
+   var globalWorker = Q.defer();
+   var globalData = null;
+
+   var Observer = new Summary();
+
+   //inherit the eventing library
+   assign(_module, new Events());
+
+
+   //maintating the global list of events
+   var _events = [
+     "onclick",
+     "onkeypress",
+     "onkeydown"
+   ];
+
+   //binding global listeners
    function initialize(){
-     for(var key in actions){
-       $(document).on(actions[key], onObserve);
+     for(var key in _events){
+       var event = _events[key];
+       document[event] = onObserve;
      }
    }
 
-   initialize();
-
    function onObserve(e){
-      var data = {
-        type: e.type,
-        x: e.clientX,
-        y: e.clientY,
-        summaries: summary
-      };
-      $(document).trigger('observation', data);
+     var data = {
+       type: e.type,
+       x: e.x,
+       y: e.y,
+       created: new Date().getTime(),
+       element: {
+         id: e.target.id,
+         tag: e.target.tag,
+         text: e.target.innerHTML
+       },
+       summaries: Observer.getRecentSummaries(5)
+     };
+     _module.emit('observation', data);
    }
 
-})($)
+
+})();
