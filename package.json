@@ -37,7 +37,6 @@
   "dependencies": {
     "minivents": "^2.0.2",
     "mutation-summary": "0.0.0",
-    "object-assign": "^4.1.0",
-    "q": "^1.4.1"
+    "object-assign": "^4.1.0"
   }
 }
